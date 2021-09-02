@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>day33_JDBC_EmployeePayrollService</name>
+=======
+	<name>day32ER_diagram_EmployeePayroll</name>
+>>>>>>> 64310b6f685f687cbe128b50efdbd89ea351c1bd
 	<comment></comment>
 	<projects>
 	</projects>
