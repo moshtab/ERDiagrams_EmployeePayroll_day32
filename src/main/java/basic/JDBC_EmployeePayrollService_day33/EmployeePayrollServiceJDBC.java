@@ -15,13 +15,8 @@ public class EmployeePayrollServiceJDBC {
 		updateEmployeePayroll();
 		showPayrollDataByName();
 		showEmployeesJoinedBetweenDate();
-<<<<<<< HEAD
-		findingMinMaxSumAvgCountOfFemailes();
-		insertNewEmployeeTransaction();
-=======
 		findingMinMaxSumAvgCountOfMalesAndFemales();
-		insertNewEmployee();
->>>>>>> 4bce229278426bebf7f8a33f5e25dcbf6f6569e5
+
 	}
 
 	private static Connection getSqlConnection() {
@@ -182,7 +177,7 @@ public class EmployeePayrollServiceJDBC {
 
 	}
 
-	private static void findingMinMaxSumAvgCountOfFemailes() {
+	private static void findingMinMaxSumAvgCountOfMalesAndFemales() {
 		System.out.println("Displaying Min,Max,sum,avg,count of Males and Females");
 		Connection conn = getSqlConnection();
 
@@ -217,88 +212,6 @@ public class EmployeePayrollServiceJDBC {
 
 				}
 			}
-		}
-	}
-
-	private static void insertNewEmployeeTransaction() {
-		System.out.println("Inserting a new employee to employee_payroll table");
-		Connection conn = getSqlConnection();
-		if (conn != null) {
-
-			String insertEmp = "INSERT INTO employee_payroll (id,name,salary,startDate,gender) values(?,?,?,?,?)";
-			try {
-				conn.setAutoCommit(false);
-				PreparedStatement preparedStatement = conn.prepareStatement(insertEmp);
-				preparedStatement.setInt(1, 8);
-				preparedStatement.setString(2, "Sami");
-				preparedStatement.setInt(3, 90000);
-				preparedStatement.setString(4, "2021-07-01");
-				preparedStatement.setString(5, "M");
-
-				int rowUpdated = preparedStatement.executeUpdate();
-				if (rowUpdated > 0) {
-					System.out.println("Data is Updated");
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				try {
-					conn.rollback();
-				} catch (SQLException e1) {
-
-					e1.printStackTrace();
-				}
-
-			}
-
-			double salary = 90000;
-			double deduction = salary * 0.2;
-			double taxable_pay = salary - deduction;
-			double tax = taxable_pay * 0.1;
-			double net_pay = salary - tax;
-			String insertpayroll = "INSERT INTO payroll_details (id,basic_pay,deductions,taxable_pay,tax,net_pay) values(?,?,?,?,?,?)";
-
-			try {
-
-				PreparedStatement preparedStatement = conn.prepareStatement(insertpayroll);
-				preparedStatement.setInt(1, 7);
-				preparedStatement.setDouble(2, salary);
-				preparedStatement.setDouble(3, deduction);
-				preparedStatement.setDouble(4, taxable_pay);
-				preparedStatement.setDouble(5, tax);
-				preparedStatement.setDouble(6, net_pay);
-				int rowUpdated = preparedStatement.executeUpdate();
-				if (rowUpdated > 0) {
-					System.out.println("Data is Updated");
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-				try {
-					conn.rollback();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-			}
-			try {
-				conn.commit();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			finally {
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException sqlException) {
-						System.out.println(sqlException.getMessage());
-
-					}
-				}
-			}
-
 		}
 	}
 
